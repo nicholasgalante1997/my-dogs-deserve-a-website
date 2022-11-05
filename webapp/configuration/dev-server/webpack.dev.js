@@ -1,8 +1,9 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        index: path.resolve(process.cwd(), 'src', 'index.ts')
+        index: path.resolve(process.cwd(), 'src', 'dev', 'index.tsx')
     },
 
     mode: 'development',
@@ -42,13 +43,10 @@ module.exports = {
         port: 4040,
         historyApiFallback: true,
         hot: true,
-        onListening: function (devServerConfig) {
-            if (!devServerConfig) {
-                throw new Error('webpack-dev-server is not defined');
-            }
-            const port = devServer.server.address().port;
-            console.log('Listening on port:', port);
-        },
         open: true
-    }
+    },
+
+    plugins: [
+      new HtmlWebpackPlugin({ template: './html/development.html' })
+    ]
 };
