@@ -26,12 +26,45 @@ html, body {
     margin: 0 auto;
 }
 
-#main-heading-row {
+.main-grid {
     display: flex;
     flex-direction: row;
+    min-height: 92vh;
+    width: 90%;
+    border-top: 1px solid white;
+}
+
+.content-controller {
+    width: 30%;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-    min-height: 14vh;
+    align-self: center;
+    padding-top: 12px;
+}
+
+.gallery-container {
+    width: 70%;
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: center;
+    padding-top: 12px;
+}
+
+.gallery-img {
     width: 100%;
+    height: auto;
+}
+
+#main-heading-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 14vh;
+    width: 90%;
     padding-left: 16px;
 }

@@ -1,4 +1,3 @@
-use std::ascii::AsciiExt;
 use std::collections::HashMap;
 use std::io::prelude::*;
 use std::net::TcpListener;
@@ -87,37 +86,27 @@ fn handle_connection(mut stream: TcpStream) {
     let request_buffer = String::from_utf8_lossy(&buffer[..]);
     let http_request = parse_http_request_from_buffer(&request_buffer);
 
-    println!("Formatted HttpRequestObject: {:#?}", http_request);
-
     let path = http_request.path.clone();
     let method = http_request.method.clone();
 
     let mut status: usize = 200;
     let mut response_header_hash_map: HashMap<String, String> = HashMap::new();
 
-    // Cross-Origin-Resource-Sharing-Headers
-    response_header_hash_map.insert(
-        String::from("Access-Control-Allow-Origin"),
-        String::from("*"),
-    );
-    response_header_hash_map.insert(
-        String::from("Access-Control-Request-Methods"),
-        String::from("*"),
-    );
-    response_header_hash_map.insert(
-        String::from("Access-Control-Allow-Methods"),
-        String::from("OPTIONS, GET"),
-    );
-    response_header_hash_map.insert(
-        String::from("Access-Control-Allow-Headers"),
-        String::from("*"),
-    );
+    http_constants::hydrate_headers_with_cors(&mut response_header_hash_map);
 
-    if method.to_ascii_lowercase() == String::from("get") {
+    if method.to_ascii_lowercase() == String::from("get") && path == String::from("/") {
         // Content-Type
         response_header_hash_map.insert(
             String::from("Content-Type"),
             String::from("text/html; charset=utf-8"),
+        );
+    }
+
+    if method.to_ascii_lowercase() == String::from("get") && path == String::from("/bundle.js") {
+        // Content-Type
+        response_header_hash_map.insert(
+            String::from("Content-Type"),
+            String::from("application/javascript"),
         );
     }
 
@@ -132,13 +121,17 @@ fn handle_connection(mut stream: TcpStream) {
         let js_file = js_file_result.unwrap();
         body = js_file;
     } else if method.to_ascii_lowercase() == String::from("options") {
-        
+        // do nothing
     } else {
         // error case/page
         status = 500;
         let html_file_result = file_reader::read("webapp/build/error.html");
         let html_file = html_file_result.unwrap();
         body = html_file;
+    }
+
+    if exceptions.len() > 0 {
+        status = 500;
     }
 
     let http_response: HttpResponse = HttpResponse {

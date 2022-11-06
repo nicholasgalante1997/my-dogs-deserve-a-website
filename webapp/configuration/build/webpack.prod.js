@@ -1,5 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+
+require('dotenv').config();
 
 module.exports = {
     entry: {
@@ -32,6 +35,10 @@ module.exports = {
                     loader: "babel-loader",
                 },
             },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
+            }
         ],
     },
 
@@ -43,6 +50,13 @@ module.exports = {
     },
 
     plugins: [
-      new HtmlWebpackPlugin({ template: './html/index.html' })
+      new HtmlWebpackPlugin({ template: './html/index.html' }),
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: 'production',
+        stage: 'delta',
+        AWS_ACCESS_KEY_ID: JSON.stringify(process.env.AWS_ACCESS_KEY_ID),
+        AWS_SECRET_ACCESS_KEY: JSON.stringify(process.env.AWS_SECRET_ACCESS_KEY),
+        AWS_S3_BUCKET_NAME: JSON.stringify(process.env.AWS_S3_BUCKET_NAME)
+      })
     ]
 };

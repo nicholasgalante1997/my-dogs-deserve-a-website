@@ -5,6 +5,7 @@ pub mod http_base_kit {
 
     pub mod http_constants {
         use super::{STATUS_200_RESPONSE_PREFIX, STATUS_500_RESPONSE_PREFIX};
+        use std::collections::HashMap;
 
         pub fn get_crlf() -> &'static str {
             "\r\n"
@@ -22,6 +23,26 @@ pub mod http_base_kit {
             let crlf = get_crlf();
             http_head.push_str(crlf);
             http_head
+        }
+
+        pub fn hydrate_headers_with_cors(headers: & mut HashMap<String, String>) {
+            // Cross-Origin-Resource-Sharing-Headers
+            headers.insert(
+                String::from("Access-Control-Allow-Origin"),
+                String::from("*"),
+            );
+            headers.insert(
+                String::from("Access-Control-Request-Methods"),
+                String::from("*"),
+            );
+            headers.insert(
+                String::from("Access-Control-Allow-Methods"),
+                String::from("OPTIONS, GET"),
+            );
+            headers.insert(
+                String::from("Access-Control-Allow-Headers"),
+                String::from("*"),
+            );
         }
     }
 }
