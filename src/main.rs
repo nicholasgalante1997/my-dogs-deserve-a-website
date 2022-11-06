@@ -1,3 +1,5 @@
+use std::ascii::AsciiExt;
+use std::collections::HashMap;
 use std::io::prelude::*;
 use std::net::TcpListener;
 use std::net::TcpStream;
@@ -8,6 +10,7 @@ extern crate serde;
 extern crate serde_json;
 
 use crate::env::environment;
+use crate::file_client::file_reader;
 use crate::http::http_base_kit::http_constants;
 use crate::request::http_request_min::parse_http_request_from_buffer;
 use crate::response::http_response_min::HttpResponse;
@@ -86,7 +89,66 @@ fn handle_connection(mut stream: TcpStream) {
 
     println!("Formatted HttpRequestObject: {:#?}", http_request);
 
-    let response = "HTTP/1.1 200 OK\r\n\r\n";
+    let path = http_request.path.clone();
+    let method = http_request.method.clone();
+
+    let mut status: usize = 200;
+    let mut response_header_hash_map: HashMap<String, String> = HashMap::new();
+
+    // Cross-Origin-Resource-Sharing-Headers
+    response_header_hash_map.insert(
+        String::from("Access-Control-Allow-Origin"),
+        String::from("*"),
+    );
+    response_header_hash_map.insert(
+        String::from("Access-Control-Request-Methods"),
+        String::from("*"),
+    );
+    response_header_hash_map.insert(
+        String::from("Access-Control-Allow-Methods"),
+        String::from("OPTIONS, GET"),
+    );
+    response_header_hash_map.insert(
+        String::from("Access-Control-Allow-Headers"),
+        String::from("*"),
+    );
+
+    if method.to_ascii_lowercase() == String::from("get") {
+        // Content-Type
+        response_header_hash_map.insert(
+            String::from("Content-Type"),
+            String::from("text/html; charset=utf-8"),
+        );
+    }
+
+    let mut body = String::new();
+
+    if method.to_ascii_lowercase() == String::from("get") && path == String::from("/") {
+        let html_file_result = file_reader::read("webapp/build/index.html");
+        let html_file = html_file_result.unwrap();
+        body = html_file;
+    } else if method.to_ascii_lowercase() == String::from("get") && path == String::from("/bundle.js") {
+        let js_file_result = file_reader::read("webapp/build/bundle.js");
+        let js_file = js_file_result.unwrap();
+        body = js_file;
+    } else if method.to_ascii_lowercase() == String::from("options") {
+        
+    } else {
+        // error case/page
+        status = 500;
+        let html_file_result = file_reader::read("webapp/build/error.html");
+        let html_file = html_file_result.unwrap();
+        body = html_file;
+    }
+
+    let http_response: HttpResponse = HttpResponse {
+        status,
+        headers: response_header_hash_map.clone(),
+        body
+    };
+
+    let response = http_response.build();
+
     stream.write(response.as_bytes()).unwrap();
     stream.flush().unwrap();
 }

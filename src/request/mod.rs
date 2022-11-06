@@ -5,10 +5,21 @@ pub mod http_request_min {
 
     #[derive(Serialize, Deserialize, Debug)]
     pub struct HttpRequest {
-        method: String,
-        headers: HashMap<String, String>,
-        path: String,
-        data: String,
+        pub method: String,
+        pub headers: HashMap<String, String>,
+        pub path: String,
+        pub data: String,
+    }
+
+    impl HttpRequest {
+        pub fn get_header_by_key(&self, key: String) -> String {
+            let header_option = self.headers.get(&key);
+            let header_value = match header_option {
+                Some(header_val) => header_val.clone(),
+                None => String::new(),
+            };
+            header_value
+        }
     }
 
     pub fn parse_http_request_from_buffer(req_buffer: &Cow<str>) -> HttpRequest {
@@ -73,8 +84,11 @@ pub mod http_request_min {
 
         println!("HttpRequest - Headers: {:#?}", headers);
 
-        let request_body_str = *segmented_req_on_line_feed_vec.get(len + 1).unwrap_or(&default_null_str);
-        let serialized_request_body = serde_json::to_string(&request_body_str).unwrap_or(default_null_string);
+        let request_body_str = *segmented_req_on_line_feed_vec
+            .get(len + 1)
+            .unwrap_or(&default_null_str);
+        let serialized_request_body =
+            serde_json::to_string(&request_body_str).unwrap_or(default_null_string);
 
         HttpRequest {
             method: String::from(http_req_method),

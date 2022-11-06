@@ -5,7 +5,7 @@ import '../styles/app.css';
 function NavLite() {
     return (
         <header id="main-heading-row">
-            <h2>Rust Based Web Server, pretty tight</h2>
+            <h2>Every dog deserves a website. Sometimes two.</h2>
         </header>
     );
 }
