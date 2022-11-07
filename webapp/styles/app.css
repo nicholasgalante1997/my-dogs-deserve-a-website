@@ -10,9 +10,13 @@ html, body {
     overflow: hidden;
     color: white;
     font-family: 'Quicksand', sans-serif;
-    background: linear-gradient(to bottom left, #017365, #024c42);
     padding: 0 auto;
     margin: 0 auto;
+    background: hsla(211, 66%, 87%, 1);
+    background: linear-gradient(180deg, hsla(211, 66%, 87%, 1) 0%, hsla(348, 67%, 88%, 1) 50%, hsla(272, 26%, 72%, 1) 100%);
+    background: -moz-linear-gradient(180deg, hsla(211, 66%, 87%, 1) 0%, hsla(348, 67%, 88%, 1) 50%, hsla(272, 26%, 72%, 1) 100%);
+    background: -webkit-linear-gradient(180deg, hsla(211, 66%, 87%, 1) 0%, hsla(348, 67%, 88%, 1) 50%, hsla(272, 26%, 72%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#C9DEF4", endColorstr="#F5CCD4", GradientType=1 );
 }
 
 #main-view {
@@ -35,7 +39,7 @@ html, body {
 }
 
 .content-controller {
-    width: 22%;
+    width: 36%;
     min-height: 92vh;
     display: flex;
     flex-direction: column;
@@ -45,12 +49,11 @@ html, body {
 }
 
 .gallery-container {
-    width: 78%;
+    width: 64%;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-self: flex-start;
-    padding-top: 12px;
+    align-self: center;
     overflow: hidden;
 }
 

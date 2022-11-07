@@ -2,7 +2,7 @@ import React from 'react';
 import LeftArrow from '../svg-assets/left.svg';
 import RightArrow from '../svg-assets/right.svg';
 
-const imgSrcTemp = 'https://d2rzwel03lx9wv.cloudfront.net/brothers/alex-perz-S6Qo8h_1QVY-unsplash.jpg';
+const imgSrcTemp = 'https://d2rzwel03lx9wv.cloudfront.net/brothers/IMG_8870.jpg';
 
 export function GalleryGrid(){
     return (
