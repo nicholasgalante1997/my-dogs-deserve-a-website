@@ -4,22 +4,22 @@
             {
                 "panelTitle": "Home",
                 "panelBannerText": "Browse our favorite photos of the two most handsome dogs in the world.",
-                "contentKey": "homeContent"
+                "contentKey": "home"
             },
             {
                 "panelTitle": "Chief",
                 "panelBannerText": "Biggest heart ever. Barely fits inside his dog body, but he makes it work. 10/10 makes your day better with a lick.",
-                "contentKey": "chiefContent"
+                "contentKey": "chief"
             },
             {
                 "panelTitle": "Dumpling",
                 "panelBannerText": "Fiery, passionate, happy to be alive. All phrases we've heard to describe this little bugger.",
-                "contentKey": "dumplingContent"
+                "contentKey": "dumpling"
             },
             {
                 "panelTitle": "Upload",
                 "panelBannerText": "If you're Brigid, you can use your pass-key to upload new photos of the little babies.",
-                "contentKey": "uploadContent"
+                "contentKey": "upload"
             }
         ]
     }

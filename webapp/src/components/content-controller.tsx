@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContentKeyType } from '../@types';
+import { useTextJson } from '../store';
 
 type ContentControllerProps = {
     contentKey: ContentKeyType;
@@ -34,49 +35,23 @@ function ControllerCard(props: ControllerCardProps){
 }
 
 export function ContentController(props: ContentControllerProps){
-    const options = [
-        {
-            key: 'home',
-            title: 'home',
-            onClick(){
-                window.location.hash = 'home';
-                props.setContentKeyType('home');
-            },
-            subtext: 'some mock caption subtext for now'
-        },
-        {
-            key: 'chief',
-            title: 'chief',
-            onClick(){
-                window.location.hash = 'chief';
-                props.setContentKeyType('chief');
-            },
-            subtext: 'some mock caption subtext for now'
 
-        },
-        {
-            key: 'dumpling',
-            title: 'dumpling',
-            onClick(){
-                window.location.hash = 'dumpling';
-                props.setContentKeyType('dumpling');
-            },
-            subtext: 'some mock caption subtext for now'
-        },
-        {
-            key: 'upload',
-            title: 'upload',
-            onClick(){
-                window.location.hash = 'upload';
-                props.setContentKeyType('upload');
-            },
-            subtext: 'some mock caption subtext for now'
-        }
-    ];
+    function flexibleOnClick (key: ContentKeyType) {
+        window.location.hash = key;
+        props.setContentKeyType(key);
+    }
+
+    const { contentController: { panels }} = useTextJson();
+
     return (
         <div className="content-controller">
-            {options.map(o => (
-                <ControllerCard {...o} isActive={props.contentKey === o.key} />
+            {panels.map(panel => (
+                <ControllerCard 
+                    subtext={panel.panelBannerText} 
+                    title={panel.panelTitle} 
+                    onClick={() => flexibleOnClick(panel.contentKey as ContentKeyType)} 
+                    isActive={props.contentKey === panel.contentKey} 
+                />
             ))}
         </div>
     );
