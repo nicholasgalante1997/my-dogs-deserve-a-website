@@ -123,11 +123,13 @@ fn handle_connection(mut stream: TcpStream) {
     } else if method.to_ascii_lowercase() == String::from("options") {
         // do nothing
     } else {
-        // error case/page
+        // unhandled route
         status = 500;
-        let html_file_result = file_reader::read("webapp/build/error.html");
-        let html_file = html_file_result.unwrap();
-        body = html_file;
+        let mut error_hash_map: HashMap<String, Vec<&str>> = HashMap::new();
+        exceptions.push("UnhandledRouteException: attempt to access an unathorized or non existent asset from the server.");
+        error_hash_map.insert(String::from("errors"), exceptions.clone());
+        let error_map_json = serde_json::to_string(&error_hash_map).unwrap_or(String::from("{}"));
+        body = error_map_json;
     }
 
     if exceptions.len() > 0 {
