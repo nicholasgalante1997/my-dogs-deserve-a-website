@@ -1,0 +1,1 @@
+export type ContentKeyType = 'home' | 'chief' | 'dumpling' | 'upload';

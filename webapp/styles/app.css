@@ -8,7 +8,7 @@ html, body {
     min-width: 100%;
     min-height: 100vh;
     overflow: hidden;
-    color: white;
+    color: black;
     font-family: 'Quicksand', sans-serif;
     padding: 0 auto;
     margin: 0 auto;
@@ -46,6 +46,37 @@ html, body {
     justify-content: flex-start;
     align-self: center;
     padding-top: 12px;
+}
+
+.controller-card-container {
+    width: 100%;
+    height: 110px;
+    border: 1px solid white;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding: 8px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    cursor: pointer;
+    background: linear-gradient(45deg, rgba(255,255,255, 0.2) 80%, rgba(255,255,255,0.04)  100%);
+}
+
+.controller-card-container:hover {
+    padding: 12px;
+}
+
+.controller-card-container:hover .controller-card-heading h1 {
+    font-size: 42px;
+    color: deeppink;
+}
+
+.controller-card-heading h1 {
+    font-size: 36px;
+    margin-block-start: 0.04em;
+    margin-block-end: 0.04em;
 }
 
 .gallery-container {

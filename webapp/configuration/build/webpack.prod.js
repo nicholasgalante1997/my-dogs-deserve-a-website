@@ -60,7 +60,8 @@ module.exports = {
         stage: 'delta',
         AWS_ACCESS_KEY_ID: JSON.stringify(process.env.AWS_ACCESS_KEY_ID),
         AWS_SECRET_ACCESS_KEY: JSON.stringify(process.env.AWS_SECRET_ACCESS_KEY),
-        AWS_S3_BUCKET_NAME: JSON.stringify(process.env.AWS_S3_BUCKET_NAME)
+        AWS_S3_BUCKET_NAME: JSON.stringify(process.env.AWS_S3_BUCKET_NAME),
+        AWS_CLOUDFRONT_DISTRIBUTION_URL: JSON.stringify(process.env.AWS_CLOUDFRONT_DISTRIBUTION_URL)
       })
     ]
 };
