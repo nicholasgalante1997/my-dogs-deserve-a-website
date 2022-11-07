@@ -5,7 +5,8 @@
   "main": "build/index.js",
   "scripts": {
     "build": "webpack --config configuration/build/webpack.prod.js",
-    "dev": "webpack serve --config configuration/dev-server/webpack.dev.js"
+    "dev": "webpack serve --config configuration/dev-server/webpack.dev.js",
+    "lint": "eslint --config .eslintrc.js --fix src/"
   },
   "keywords": [
     "dog",
@@ -30,9 +31,13 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "@types/webpack": "^5.28.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
     "babel-loader": "^9.1.0",
     "css-loader": "^6.7.1",
     "dotenv": "^16.0.3",
+    "eslint": "^8.27.0",
+    "eslint-plugin-react": "^7.31.10",
     "html-webpack-plugin": "^5.5.0",
     "json-loader": "^0.5.7",
     "style-loader": "^3.3.1",

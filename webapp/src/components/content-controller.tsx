@@ -16,9 +16,9 @@ type ControllerCardProps = {
 function ControllerCard(props: ControllerCardProps){
     const overrideOnActive: Record<string, string> = {};
     if (props.isActive) {
-        overrideOnActive.border = '1px solid black';
+        overrideOnActive.border = '1px solid #8ca1ab';
         overrideOnActive.fontSize = '24px';
-        overrideOnActive.color = 'purple';
+        overrideOnActive.color = '#8ca1ab';
         overrideOnActive.overflow = 'hidden';
     }
     return (

@@ -33,19 +33,18 @@ html, body {
 .main-grid {
     display: flex;
     flex-direction: row;
-    min-height: 92vh;
     width: 90%;
     border-top: 1px solid white;
 }
 
 .content-controller {
     width: 36%;
-    min-height: 92vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-self: center;
-    padding-top: 12px;
+    align-items: center;
+    padding-top: 18px;
 }
 
 .controller-card-container {
@@ -66,11 +65,13 @@ html, body {
 
 .controller-card-container:hover {
     padding: 12px;
+    border: 1px solid #f4c8df;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .controller-card-container:hover .controller-card-heading h1 {
     font-size: 42px;
-    color: deeppink;
+    color: #f4c8df;
 }
 
 .controller-card-heading h1 {
@@ -81,31 +82,35 @@ html, body {
 
 .gallery-container {
     width: 64%;
+    margin-top: 20px;
+    margin-left: 16px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-self: center;
+    align-items: flex-start;
     overflow: hidden;
+    border: 1px solid white;
+    border-radius: 4px;
+    background-color: rgba(255,255,255, 0.7);
 }
 
 #gallery-img-container {
-    padding-left: 4rem;
-    padding-right: 4rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    flex-grow: 1;
+    margin-top: 24px;
 }
 
 #gallery-panel-left,
 #gallery-panel-right {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 30%;
-    flex-grow: 1;
 }
 
 .icon {
