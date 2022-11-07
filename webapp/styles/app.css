@@ -35,7 +35,7 @@ html, body {
 }
 
 .content-controller {
-    width: 30%;
+    width: 22%;
     min-height: 92vh;
     display: flex;
     flex-direction: column;
@@ -45,18 +45,63 @@ html, body {
 }
 
 .gallery-container {
-    width: 70%;
-    height: 92vh;
+    width: 78%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: flex-start;
+    padding-top: 12px;
+    overflow: hidden;
+}
+
+#gallery-img-container {
+    padding-left: 4rem;
+    padding-right: 4rem;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-self: center;
-    padding-top: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+#gallery-panel-left,
+#gallery-panel-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    flex-grow: 1;
+}
+
+.icon {
+    height: 96px;
+    width: 96px;
+    cursor: pointer;
+}
+
+.icon:hover {
+    height: 112px;
+    width: 112px;
+    cursor: pointer;
+    transition: height 0.4s, width 0.4s;
+}
+
+#gallery-text-box {
+    width: 90%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    margin-top: 16px;
 }
 
 .gallery-img {
-    width: 100%;
+    width: 90%;
     height: auto;
+    border-radius: 4px;
 }
 
 #main-heading-row {

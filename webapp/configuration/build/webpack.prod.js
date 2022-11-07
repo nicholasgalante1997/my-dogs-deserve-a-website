@@ -38,7 +38,12 @@ module.exports = {
             {
                 test: /\.json$/,
                 loader: 'json-loader'
-            }
+            },
+            {
+                test: /\.svg$/i,
+                issuer: /\.[jt]sx?$/,
+                use: ['@svgr/webpack'],
+            },
         ],
     },
 
@@ -52,7 +57,6 @@ module.exports = {
     plugins: [
       new HtmlWebpackPlugin({ template: './html/index.html' }),
       new webpack.EnvironmentPlugin({
-        NODE_ENV: 'production',
         stage: 'delta',
         AWS_ACCESS_KEY_ID: JSON.stringify(process.env.AWS_ACCESS_KEY_ID),
         AWS_SECRET_ACCESS_KEY: JSON.stringify(process.env.AWS_SECRET_ACCESS_KEY),
