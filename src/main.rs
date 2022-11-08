@@ -25,8 +25,7 @@ pub mod webapp_client;
 const DEVHOST: &str = "0.0.0.0:9000";
 
 // Server Side Logs
-const SERVER_STARTED_LOCAL_DEV_LOG: &str =
-    "Starting Rust Tcp Server. Attempting to bind to port 9000.";
+const SERVER_STARTED_LOCAL_DEV_LOG: &str = "Starting Rust Tcp Server. Attempting to bind to port 9000.";
 const SERVER_STARTED_PROD_LOG: &str = "Starting Rust Tcp Server in production environment. Container is attempting to bind to docker network port: 9000";
 
 fn main() {

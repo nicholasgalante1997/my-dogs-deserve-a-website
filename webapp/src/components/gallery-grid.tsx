@@ -49,14 +49,21 @@ export function GalleryGrid({ images, contentKey }: GalleryGridProps){
         }
     }
 
+    function imgOnClick(){
+        window.open(activeImages[imageIndex].url ?? imgSrcTemp, '_blank');
+    }
+
     function renderImageGallery(){
         return (
           <div className="gallery-container">
+            <div className="img-count">
+                {imageIndex + 1} of {activeImages.length} photos
+            </div>
             <div id="gallery-panel-left">
                 <LeftArrow className="icon" onClick={leftClick} />
             </div>
             <div id="gallery-img-container">
-               <img className="gallery-img" src={activeImages[imageIndex].url ?? imgSrcTemp} /> 
+               <img className="gallery-img" onClick={imgOnClick} src={activeImages[imageIndex].url ?? imgSrcTemp} /> 
                <div id="gallery-text-box">
                     Some mock image text to see what it looks like with a caption under the image
                </div>

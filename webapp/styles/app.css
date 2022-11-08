@@ -89,6 +89,7 @@ html, body {
 }
 
 .gallery-container {
+    position: relative;
     width: 64%;
     margin-top: 20px;
     margin-left: 16px;
@@ -102,7 +103,20 @@ html, body {
     background-color: rgba(255,255,255, 0.7);
 }
 
+.img-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 40px;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #gallery-img-container {
+    position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -149,6 +163,7 @@ html, body {
     width: 90%;
     height: auto;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 #main-heading-row {
