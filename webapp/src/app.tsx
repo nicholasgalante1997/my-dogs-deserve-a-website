@@ -5,6 +5,8 @@ import { S3ImageObject } from './@types';
 import { filterS3ObjectsOnFileCriteria } from './utils';
 import '../styles/app.css';
 import { useAWSClientS3Context } from './s3-context';
+import { AWSClientS3ContextProvider } from './s3-context';
+import { TextJsonProviderComponent } from './store';
 
 export function App () {
     const [bucketObjectList, setBucketObjectList] = React.useState<S3ImageObject[]>([]);
@@ -30,4 +32,14 @@ export function App () {
             <ContentGrid images={bucketObjectList} />
         </section>
     );
-}
+};
+
+export function AppWithHydratedContext () {
+    return (
+      <AWSClientS3ContextProvider>
+        <TextJsonProviderComponent>
+          <App />
+        </TextJsonProviderComponent>  
+      </AWSClientS3ContextProvider>
+    );
+};
