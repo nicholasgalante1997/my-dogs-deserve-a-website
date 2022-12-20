@@ -101,6 +101,16 @@ html, body {
     border: 1px solid white;
     border-radius: 4px;
     background-color: rgba(255,255,255, 0.7);
+    max-height: 78vh;
+}
+
+.upload-grid {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .img-count {

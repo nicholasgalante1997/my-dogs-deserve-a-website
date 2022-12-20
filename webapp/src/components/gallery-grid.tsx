@@ -4,7 +4,7 @@ import { S3ImageObject, ContentKeyType } from '../@types';
 import { useAWSClientS3Context } from '../s3-context';
 import LeftArrow from '../svg-assets/left.svg';
 import RightArrow from '../svg-assets/right.svg';
-import { filterImagesOnParentDir } from '../utils';
+import { filterImagesOnParentDir, logger } from '../utils';
 
 const imgSrcTemp = 'https://d2rzwel03lx9wv.cloudfront.net/brothers/IMG_8870.jpg';
 
@@ -17,7 +17,15 @@ export function GalleryGrid({ images, contentKey }: GalleryGridProps){
     const [imageIndex, setImageIndex] = React.useState(0);
     const [activeImages, setActiveImages] = React.useState(filterImagesOnParentDir(contentKey, images));
     const [activeImageMetadata, setActiveImageMetadata] = React.useState<any>();
+    const inputFileRef = React.useRef<HTMLInputElement>();
     const client = useAWSClientS3Context();
+    React.useEffect(() => {
+        if (typeof inputFileRef !== 'undefined') {
+            if (inputFileRef.current?.files?.length && inputFileRef.current.files.length > 0) {
+                logger('info', inputFileRef.current.files);
+            }
+        }
+    }, [inputFileRef.current])
     React.useEffect(() => {
         setActiveImages(filterImagesOnParentDir(contentKey, images));
         setImageIndex(0);
@@ -77,8 +85,10 @@ export function GalleryGrid({ images, contentKey }: GalleryGridProps){
 
     function renderImageUploader(){
         return (
-            <div>
-                upload
+            <div className='gallery-container'>
+                <div className="upload-grid">
+                    upload  <input ref={inputFileRef} type="file" accept="image/jpeg, image/png, image/jpg" id="upload-input" />
+                </div>
             </div>
         )
     }

@@ -47,6 +47,8 @@ fn main() {
     let server_started_successfully_log: &str = "Server started! Listening on port 9000;";
     println!("{server_started_successfully_log}");
 
+    // After this point, the server is live and listening for tcp requests
+    // We cannot panic! in any unexpected manner or the server will crash
     for stream in server.incoming() {
         let stream: TcpStream = match stream {
             Ok(stream) => stream,
@@ -59,7 +61,7 @@ fn main() {
 
 fn handle_connection(mut stream: TcpStream) {
     let mut exceptions: Vec<&str> = vec![];
-
+    
     let mut buffer_failed_to_write_exception_string = String::new();
 
     let mut buffer = [0; 1024];
